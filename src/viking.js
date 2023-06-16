@@ -100,5 +100,30 @@ class War {
     }
 
 
+    generalAttack(attackingClan) {
+
+        if (attackingClan == "Viking" || attackingClan == "viking"){
+            let attacker = this.vikingArmy;
+            let victim = this.saxonArmy;
+        }else{
+            let attacker = this.saxonArmy;
+            let victim = this.vikingArmy;
+        }
+
+
+        let attackerPick = Math.floor(Math.random() * this.vikingArmy.length);
+        let victimPick = Math.floor(Math.random() * this.victimArmy.length);
+
+        let randomAttacker = attacker.at(attackerPick);
+        let randomVictim = victim.at(victimPick);
+
+        const fightResult = randomVictim.receiveDamage(randomAttacker.strength);
+        
+        if (randomVictim.health <= 0) {
+            victim.splice(randomVictim, 1);
+        } 
+        return fightResult;
+    }
+
 
 }

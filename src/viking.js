@@ -77,9 +77,11 @@ class War {
         let randomViking = this.vikingArmy.at(randomVikingPick);
         let randomSaxon = this.saxonArmy.at(randomSaxonPick);
 
-        randomSaxon.receiveDamage(randomViking.strength);
+        const fightResult = randomSaxon.receiveDamage(randomViking.strength);
+        
         if (randomSaxon.health <= 0) {
             this.saxonArmy.splice(randomSaxonPick, 1);
         } 
+        return fightResult;
     }
 }

@@ -5,7 +5,7 @@ class Soldier {
         this.strength = strength;
     };
 
-    attack () {
+    attack() {
         return this.strength;
     };
 
@@ -17,7 +17,7 @@ class Soldier {
 
 // Viking
 class Viking extends Soldier {
-    constructor (name, health, strength){
+    constructor(name, health, strength) {
         super(health, strength);
         this.name = name;
     };
@@ -31,14 +31,14 @@ class Viking extends Soldier {
         }
     };
 
-    battleCry(){
+    battleCry() {
         return `Odin Owns You All!`
     }
 }
 
 // Saxon
 class Saxon extends Soldier {
-    constructor(health, strength){
+    constructor(health, strength) {
         super(health, strength);
     };
 
@@ -54,16 +54,16 @@ class Saxon extends Soldier {
 
 // War
 class War {
-    constructor (){
+    constructor() {
         this.vikingArmy = [];
         this.saxonArmy = [];
     }
 
-    addViking (viking){
+    addViking(viking) {
         this.vikingArmy.push(viking);
     }
 
-    addSaxon (saxon){
+    addSaxon(saxon) {
         this.saxonArmy.push(saxon);
     }
 
@@ -76,10 +76,10 @@ class War {
         let randomSaxon = this.saxonArmy.at(randomSaxonPick);
 
         const fightResult = randomSaxon.receiveDamage(randomViking.strength);
-        
+
         if (randomSaxon.health <= 0) {
             this.saxonArmy.splice(randomSaxonPick, 1);
-        } 
+        }
         return fightResult;
     }
 
@@ -92,42 +92,41 @@ class War {
         let randomViking = this.vikingArmy.at(randomVikingPick);
 
         const fightResult = randomViking.receiveDamage(randomSaxon.strength);
-        
+
         if (randomViking.health <= 0) {
             this.vikingArmy.splice(randomVikingPick, 1);
-        } 
+        }
         return fightResult;
     }
 
 
     generalAttack(attackingClan) {
 
-        if (attackingClan == "Viking" || attackingClan == "viking"){
-            let attacker = this.vikingArmy;
-            let victim = this.saxonArmy;
-        }else{
-            let attacker = this.saxonArmy;
-            let victim = this.vikingArmy;
+        let attacker = this.saxonArmy
+        let victim = this.vikingArmy
+        if(attackingClan === "Viking") {
+           attacker = this.vikingArmy
+           victim = this.saxonArmy
         }
 
 
-        let attackerPick = Math.floor(Math.random() * this.vikingArmy.length);
-        let victimPick = Math.floor(Math.random() * this.victimArmy.length);
+        let attackerPick = Math.floor(Math.random() * attacker.length);
+        let victimPick = Math.floor(Math.random() * victim.length);
 
         let randomAttacker = attacker.at(attackerPick);
         let randomVictim = victim.at(victimPick);
 
         const fightResult = randomVictim.receiveDamage(randomAttacker.strength);
-        
+
         if (randomVictim.health <= 0) {
             victim.splice(randomVictim, 1);
-        } 
+        }
         return fightResult;
     }
     showStatus() {
-        if (this.saxonArmy.length === 0){
+        if (this.saxonArmy.length === 0) {
             return "Vikings have won the war of the century!";
-        } else if (this.vikingArmy.length === 0){
+        } else if (this.vikingArmy.length === 0) {
             return "Saxons have fought for their lives and survived another day...";
         } else if (this.vikingArmy.length > 0 && this.saxonArmy.length > 0) {
             return "Vikings and Saxons are still in the thick of battle.";
